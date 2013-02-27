@@ -148,6 +148,11 @@ a:hover {
     color: #888888;
     text-decoration: underline;
 }
+
+#content{
+    min-height: 400px;
+}
+
 .row {
     margin-left: -20px;
     *zoom: 1;
@@ -2981,24 +2986,9 @@ input[type="submit"].btn.btn-mini {
     margin-bottom: 18px;
 }
 .navbar-inner {
-    min-height: 70px;
+    min-height: 40px;
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #fcfbfd;
-    background-image: -moz-linear-gradient(top, #fcfbfd, #fcfbfd);
-    background-image: -ms-linear-gradient(top, #fcfbfd, #fcfbfd);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fcfbfd), to(#fcfbfd));
-    background-image: -webkit-linear-gradient(top, #fcfbfd, #fcfbfd);
-    background-image: -o-linear-gradient(top, #fcfbfd, #fcfbfd);
-    background-image: linear-gradient(top, #fcfbfd, #fcfbfd);
-    background-repeat: repeat-x;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfbfd', endColorstr='#fcfbfd', GradientType=0);
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
-    -moz-box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 3px rgba(0,0,0,.25), inset 0 -1px 0 rgba(0,0,0,.1);
 }
 .navbar .container {
     width: auto;
@@ -3015,9 +3005,9 @@ input[type="submit"].btn.btn-mini {
 .navbar .brand {
     float: left;
     display: block;
-    padding: 23px 20px 27px;
+    padding: 10px 10px 0px;
     margin-left: -20px;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 200;
     line-height: 1;
     color: #222222;
@@ -3034,7 +3024,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar .btn,
 .navbar .btn-group {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .navbar .btn-group .btn {
     margin: 0;
@@ -3090,7 +3080,6 @@ input[type="submit"].btn.btn-mini {
     line-height: 1;
     color: #ffffff;
     background-color: #ffffff;
-    border: 1px solid #b3b3b3;
     -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
     -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
     box-shadow: inset 0 1px 2px rgba(0,0,0,.1), 0 1px 0 rgba(255,255,255,.15);
@@ -3177,7 +3166,7 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar .btn-group {
     margin: 0;
-    padding: 20px 5px 21px;
+    padding: 10px 5px 0px;
 }
 .navbar .nav > li > a:hover {
     background-color: #eeeeee;
@@ -4219,13 +4208,6 @@ a.btn,
     text-decoration: none;
 }
 .navbar .navbar-inner {
-    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
-    border-top: 1px solid #E5E5E5;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    border-radius: 0;
 }
 .navbar .brand {
     text-shadow: none;

@@ -4,8 +4,8 @@
 		<?php } ?>
 		</div><!--/fluid-row-->
 		<?php if(!isset($no_visible_elements) || !$no_visible_elements)	{ ?>
-		
-		<hr>
+
+        <p>&nbsp;</p>
 
 		<div class="modal hide fade" id="myModal">
 			<div class="modal-header">
@@ -22,8 +22,19 @@
 		</div>
 
 		<footer>
-			<p class="pull-left">&copy; <a href="http://usman.it" target="_blank">Muhammad Usman</a> <?php echo date('Y') ?></p>
-			<p class="pull-right">Powered by: <a href="http://usman.it/free-responsive-admin-template">Charisma</a></p>
+			<p class="pull-left">
+                <span title=".icon32  .icon-white  .icon-sent " class="icon32 icon-white icon-sent"></span><br/>
+
+                open4scrum - a visual scrumboard tool.</p>
+			<p class="pull-right">
+
+                Contact us at
+                <br/>
+                <a style="color:#ccc;" href="https://twitter.com/ekandreas">Twitter</a>
+
+                <br/><br/>
+
+                Join the project at <br/><a style="color:#ccc;" href="https://github.com/EkAndreas/open4scrum">Github</a></p>
 		</footer>
 		<?php } ?>
 
@@ -102,20 +113,7 @@
 	<script src="<?php echo get_stylesheet_directory_uri() ?>/js/jquery.history.js"></script>
 	<!-- application script for Charisma demo -->
 	<script src="<?php echo get_stylesheet_directory_uri() ?>/js/charisma.js"></script>
-	
-	<?php //Google Analytics code for tracking my demo site, you can remove this.
-		if($_SERVER['HTTP_HOST']=='usman.it') { ?>
-		<script>
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-26532312-1']);
-			_gaq.push(['_trackPageview']);
-			(function() {
-			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
-			})();
-		</script>
-	<?php } ?>
+
 	
 </body>
 </html>
