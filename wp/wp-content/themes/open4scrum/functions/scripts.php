@@ -10,7 +10,7 @@ function open4scrum_scripts() {
 
     wp_enqueue_script(
         'jquery-ui',
-        get_template_directory_uri() . '/js/jquery-ui-1.8.21.custom.min.js',
+        'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js',
         array('jquery'),
         false, true
     );
@@ -93,7 +93,7 @@ function open4scrum_styles(){
     wp_enqueue_style( 'open4scrum-css', get_stylesheet_directory_uri() . '/css/open4scrum.css' );
     wp_enqueue_style( 'bootstrap-responsive-css', get_stylesheet_directory_uri() . '/css/bootstrap-responsive.css' );
     wp_enqueue_style( 'charisma-app-css', get_stylesheet_directory_uri() . '/css/charisma-app.css' );
-    wp_enqueue_style( 'jquery-ui-css', get_stylesheet_directory_uri() . '/css/jquery-ui-1.8.21.custom.css' );
+    //wp_enqueue_style( 'jquery-ui-css', get_stylesheet_directory_uri() . '/css/jquery-ui-1.8.21.custom.css' );
 
     wp_enqueue_style( 'fullcalendar-css', get_stylesheet_directory_uri() . '/css/fullcalendar.css' );
     wp_enqueue_style( 'fullcalendar.print-css', get_stylesheet_directory_uri() . '/css/fullcalendar.print.css' );

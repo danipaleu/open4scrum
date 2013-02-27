@@ -69,7 +69,7 @@
 				<div class="well nav-collapse sidebar-nav">
 					<ul class="nav nav-tabs nav-stacked main-menu">
 						<li class="nav-header hidden-tablet">Main</li>
-						<li><a class="ajax-link" href="index.html"><i class="icon-home"></i><span class="hidden-tablet"> Home</span></a></li>
+						<li><a class="ajax-link" href="/"><i class="icon-home"></i><span class="hidden-tablet"> Home</span></a></li>
 					</ul>
 				</div><!--/.well -->
 			</div><!--/span-->
