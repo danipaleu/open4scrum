@@ -54,7 +54,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"> <span class="icon32 icon-black icon-sent"></span><span class="logotext">open4scrum</span></a>
+				<a class="brand" href="/"> <span class="icon32 icon-black icon-sent"></span><span class="logotext">open4scrum</span></a>
 				
 				<!-- user dropdown starts -->
 				<div class="btn-group pull-right" >
