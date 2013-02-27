@@ -20,7 +20,7 @@
 
 !function ($) {
 
-  $(function () {
+  $(function ($) {
 
     "use strict"; // jshint ;_;
 

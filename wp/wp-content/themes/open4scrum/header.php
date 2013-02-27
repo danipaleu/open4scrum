@@ -1,57 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<!--
-		Charisma v1.0.0
-
-		Copyright 2012 Muhammad Usman
-		Licensed under the Apache License v2.0
-		http://www.apache.org/licenses/LICENSE-2.0
-
-		http://usman.it
-		http://twitter.com/halalit_usman
-	-->
 	<meta charset="utf-8">
 	<title>open4scrum</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
-	<meta name="author" content="Muhammad Usman">
+	<meta name="description" content="open4scrum an open visual scrumboard">
+	<meta name="author" content="EkAndreas">
 
-	<!-- The styles -->
-	<link id="bs-css" href="<?php echo get_stylesheet_directory_uri() ?>/css/bootstrap-cerulean.css" rel="stylesheet">
-	<style type="text/css">
-	  body {
-		padding-bottom: 40px;
-	  }
-	  .sidebar-nav {
-		padding: 9px 0;
-	  }
-	</style>
-	<link href="<?php echo get_stylesheet_directory_uri() ?>/css/bootstrap-responsive.css" rel="stylesheet">
-	<link href="<?php echo get_stylesheet_directory_uri() ?>/css/charisma-app.css" rel="stylesheet">
-	<link href="<?php echo get_stylesheet_directory_uri() ?>/css/jquery-ui-1.8.21.custom.css" rel="stylesheet">
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/fullcalendar.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/fullcalendar.print.css' rel='stylesheet'  media='print'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/chosen.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/uniform.default.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/colorbox.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/jquery.cleditor.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/jquery.noty.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/noty_theme_default.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/elfinder.min.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/elfinder.theme.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/jquery.iphone.toggle.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/opa-icons.css' rel='stylesheet'>
-	<link href='<?php echo get_stylesheet_directory_uri() ?>/css/uploadify.css' rel='stylesheet'>
-
-	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 
 	<!-- The fav icon -->
 	<link rel="shortcut icon" href="<?php echo get_stylesheet_directory_uri() ?>/img/favicon.ico">
-		
+
+    <?php wp_head(); ?>
+
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
+
 </head>
 
 <body>

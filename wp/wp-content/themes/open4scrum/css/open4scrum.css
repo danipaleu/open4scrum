@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+body {
+    padding-bottom: 40px;
+}
+.sidebar-nav {
+    padding: 9px 0;
+}
+
 /*!
  * Bootstrap v2.0.4
  *
@@ -150,7 +158,7 @@ a:hover {
 }
 
 #content{
-    min-height: 400px;
+    min-height: 600px;
 }
 
 .row {
