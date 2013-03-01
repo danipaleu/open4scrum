@@ -144,8 +144,9 @@ class open4scrum_site{
                 <?php
                 return;
             }
-            else
+            else{
                 wp_new_user_notification( $user_id, $password );
+            }
         }
 
         $domain = get_bloginfo('url');
@@ -162,37 +163,12 @@ class open4scrum_site{
             add_user_to_blog( $blog_id, $user_id, 'subscriber' );
         }
 
-        $pages = array(
-            array(
-                'name'  => 'New Page',
-                'title' => 'this is page title',
-            ),
-        );
-
-
-        $template = array(
-            'post_type'   => 'page',
-            'post_status' => 'publish',
-            'post_author' => 1
-        );
-
-        foreach( $pages as $page ) {
-            $exists = get_page_by_title( $page['title'] );
-            $my_page = array(
-                'post_name'  => $page['name'],
-                'post_title' => $page['title']
-            );
-            $my_page = array_merge( $my_page, $template );
-
-            switch_to_blog($blog_id);
-            $id = ( $exists ? $exists->ID : wp_insert_post( $my_page ) );
-            switch_to_blog(1);
-        }
+        $blog = get_blog_details( $blog_id );
 
         ?>
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Congratulations!</strong> Site <?php echo $company; ?> created, please check your email!
+            <strong>Congratulations!</strong><br/><a href="<?php echo get_bloginfo('url') . $blog->path; ?>" target="_blank">Site <?php echo $company_name; ?></a> created, please check your email!
         </div>
         <?php
 
