@@ -61,19 +61,25 @@
 			<a class="brand" href="/">
 				<span class="icon32 icon-black icon-sent"></span><span class="logotext">open4scrum</span></a>
 
-			<!-- user dropdown starts -->
-			<div class="btn-group pull-right">
-				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-					<i class="icon-user"></i><span class="hidden-phone"> admin</span>
-					<span class="caret"></span>
-				</a>
-				<ul class="dropdown-menu">
-					<li><a href="#">Profile</a></li>
-					<li class="divider"></li>
-					<li><a href="login.html">Logout</a></li>
-				</ul>
-			</div>
-			<!-- user dropdown ends -->
+			<?php
+			if ( is_user_logged_in() ){
+				?>
+				<!-- user dropdown starts -->
+				<div class="btn-group pull-right">
+					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="icon-user"></i><span class="hidden-phone"> <?php echo wp_get_current_user()->user_email; ?></span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="<?php echo open4scrum_site::get_blogurl( wp_get_current_user()->ID ); ?>">Dashboard</a></li>
+						<li class="divider"></li>
+						<li><a href="<?php echo wp_logout_url('/'); ?>">Logout</a></li>
+					</ul>
+				</div>
+				<!-- user dropdown ends -->
+				<?php
+			}
+			?>
 
 		</div>
 	</div>

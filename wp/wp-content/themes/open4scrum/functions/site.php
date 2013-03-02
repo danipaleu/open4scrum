@@ -3,7 +3,60 @@
 /**
  * Handles login and create new site
  */
+$open4scrumsite = new open4scrum_site();
 class open4scrum_site {
+
+	function __construct() {
+
+		add_action( 'init', array( &$this, 'init' ) );
+
+	}
+
+	static function get_blogurl( $user_id ){
+
+		$url = get_bloginfo('url');
+		$blogs = get_blogs_of_user( $user_id, true );
+
+		foreach( $blogs as $key => $blog ){
+			if ( $key != 1 ){
+				$url = $blog->siteurl;
+				break;
+			}
+
+		}
+
+		return $url;
+
+	}
+
+	function init(){
+
+		//check if login
+		if( isset( $_POST['button_login'] ) &&
+				isset( $_POST['email'] ) &&
+				isset( $_POST['password'] ) ){
+
+			if ( check_admin_referer( 'login-site' ) ){
+
+				$user = wp_authenticate( $_POST['email'], $_POST['password'] );
+
+				if ( get_class( $user ) == 'WP_User' ){
+
+					wp_set_auth_cookie( $user->ID, true );
+					do_action( 'wp_login', $user->user_login );
+
+					//redirect to site!
+					wp_safe_redirect( $this->get_blogurl( $user->ID ) );
+
+					exit;
+
+				}
+
+			}
+
+		}
+
+	}
 
 	function display_login() {
 
@@ -38,6 +91,7 @@ class open4scrum_site {
 				<button type="submit" class="btn btn-primary" name="button_login">Login</button>
 			</div>
 		</fieldset>
+		<?php wp_nonce_field( 'login-site' ); ?>
 	</form>
 	<?php
 
@@ -128,6 +182,15 @@ class open4scrum_site {
 	}
 
 	function login_action() {
+
+		if ( isset( $_POST['button_login'] ) ){
+			?>
+			<div class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>Not authenticated!</strong> Your logon credentials are wrong!
+			</div>
+			<?php
+		}
 
 	}
 
@@ -274,7 +337,6 @@ class open4scrum_site {
 			"UPDATE ". $prefix . "options SET option_value = 'page' WHERE option_name = 'show_on_front';"
 		);
 		foreach ($queries as $query){
-			error_log($query);
 			$wpdb->query($query);
 		}
 
