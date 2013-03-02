@@ -66,19 +66,50 @@ class open4scrum_site{
     }
 
     function create_form(){
+
+        $_SESSION['captcha'] = captcha(array(
+                'code' => '',
+                'min_length' => 6,
+                'max_length' => 6,
+                'png_backgrounds' => array('default.png'),
+                'fonts' => array('times_new_yorker.ttf'),
+                'characters' => '0123456789',
+                'min_font_size' => 30,
+                'max_font_size' => 30,
+                'color' => '#999',
+                'angle_min' => 10,
+                'angle_max' => 35,
+                'shadow' => true,
+                'shadow_color' => '#666',
+                'shadow_offset_x' => -2,
+                'shadow_offset_y' => 2
+        ));
+
         ?>
         <form class="form-horizontal" method="POST">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label" for="company">Company Name</label>
                     <div class="controls">
-                        <input class="input-xlarge focused" name="company" id="company" type="text" value="<?php echo $_POST['company']; ?>">
+                        <input class="input-xlarge focused" name="company" id="company" type="text" value="<?php echo $_POST['company']; ?>" placeholder="a name for all your projects">
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Email Address</label>
                     <div class="controls">
-                        <input class="input-xlarge focused" name="email2" id="email2" type="text" value="<?php echo $_POST['email2']; ?>">
+                        <input class="input-xlarge focused" name="email2" id="email2" type="text" value="<?php echo $_POST['email2']; ?>" placeholder="your email address">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Captcha Control</label>
+                    <div class="controls">
+                        <input class="input-xlarge span4" name="captcha" id="captcha" type="text" value="" placeholder="captcha code" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <img src="<?php echo $_SESSION['captcha']['image_src']; ?>" alt="captcha" class="span4"/>
                     </div>
                 </div>
                 <div class="form-actions">
@@ -97,6 +128,17 @@ class open4scrum_site{
     function create_action(){
 
         global $wpdb;
+
+        if ( $_REQUEST['captcha'] != $_SESSION['captcha']['code'] ){
+            ?>
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>Captcha check</strong><br/>Captcha control code missing or wrong.<br/>Please, try again!
+            </div>
+            <?php
+
+            return;
+        }
 
         if ( !check_admin_referer( 'create-site' ) ){
             ?>
@@ -121,11 +163,18 @@ class open4scrum_site{
             $company = strtolower( $company );
 
         $subdirectory_reserved_names = apply_filters( 'subdirectory_reserved_names', array( 'page', 'comments', 'blog', 'files', 'feed' ) );
+
+        //fill with blog names
+        $sites = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM " . $wpdb->prefix . "blogs ORDER BY blog_id" ) );
+        foreach( $sites as $row ){
+            $subdirectory_reserved_names[] = str_replace('/', '', $row->path);
+        }
+
         if ( in_array( $company, $subdirectory_reserved_names ) ) {
             ?>
             <div class="alert alert-error">
                 <button type="button" class="close" data-dismiss="alert">×</button>
-                <strong>Duplicate!</strong> The given name could not be used to create a new site!
+                <strong>Duplicate</strong><br/>The given name could not be used to create a new site!
             </div>
             <?php
             return;
@@ -145,7 +194,7 @@ class open4scrum_site{
                 return;
             }
             else{
-                wp_new_user_notification( $user_id, $password );
+                //wp_new_user_notification( $user_id, $password );
             }
         }
 
@@ -168,10 +217,11 @@ class open4scrum_site{
         ?>
         <div class="alert alert-success">
             <button type="button" class="close" data-dismiss="alert">×</button>
-            <strong>Congratulations!</strong><br/><a href="<?php echo get_bloginfo('url') . $blog->path; ?>" target="_blank">Site <?php echo $company_name; ?></a> created, please check your email!
+            <strong>Congratulations!</strong><br/>Site <a href="<?php echo get_bloginfo('url') . $blog->path; ?>" target="_blank"> <?php echo get_bloginfo('url') . $blog->path; ?></a> created.<br/>Please check your email for more info!
         </div>
         <?php
 
+        //Now! Send the person a message about the next step!
 
     }
 
