@@ -222,6 +222,21 @@ class open4scrum_site{
         <?php
 
         //Now! Send the person a message about the next step!
+        $subject = "open4scrum";
+        $body = "<h2>Welcome!</h2>";
+        $body .= "<p>Your site '<a href=\"" . get_bloginfo('url') . $blog->path . "\">" . $company_name . "</a>' is now created.</p>";
+        $body .= "<p>You can login with your Email Address '" . $email . "' and password '" . $password . "' any time.</p>";
+        $body .= "<p>Now, login and invite your collegues and try out open4scrum!</p>";
+        $body .= "<p>See you!</p>";
+
+        add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+        wp_mail( $email, $subject, $body );
+        remove_filter( 'wp_mail_content_type', 'set_html_content_type' ); // reset content-type to to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
+
+        function set_html_content_type()
+        {
+            return 'text/html';
+        }
 
     }
 
