@@ -220,13 +220,7 @@ class open4scrum_site {
 
 		$blog = get_blog_details( $blog_id );
 
-		?>
-	<div class="alert alert-success">
-		<button type="button" class="close" data-dismiss="alert">×</button>
-		<strong>Congratulations!</strong><br />Site
-		<a href="<?php echo get_bloginfo( 'url' ) . $blog->path; ?>" target="_blank"> <?php echo get_bloginfo( 'url' ) . $blog->path; ?></a> created.<br />Please check your email for more info!
-	</div>
-	<?php
+		//echo print_r($blog,true);
 
 		//Now! Send the person a message about the next step!
 		$subject = "open4scrum";
@@ -236,14 +230,62 @@ class open4scrum_site {
 		$body .= "<p>Now, login and invite your collegues and try out open4scrum!</p>";
 		$body .= "<p>See you!</p>";
 
-		add_filter( 'wp_mail_content_type', 'set_html_content_type' );
+		add_filter( 'wp_mail_content_type', array( &$this, 'set_html_content_type' ) );
 		wp_mail( $email, $subject, $body );
 		remove_filter( 'wp_mail_content_type', 'set_html_content_type' ); // reset content-type to to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
 
-		function set_html_content_type() {
-			return 'text/html';
+		$prefix = $wpdb->prefix . $blog->blog_id . '_';
+
+		$sql = "DELETE FROM ". $prefix . "posts;";
+		//echo $sql;
+		$wpdb->query( $sql );
+		$sql = "DELETE FROM ". $prefix . "comments;";
+		//echo $sql;
+		$wpdb->query( $sql );
+
+		switch_to_blog( $blog->blog_id );
+
+		$home_post = array(
+			'post_title'    => 'Home',
+			'post_status'   => 'publish',
+			'post_author'   => 1,
+			'post_type'			=> 'page'
+		);
+
+		// Insert the post into the database
+		$startpage_id = wp_insert_post( $home_post );
+
+		update_post_meta($startpage_id, '_wp_page_template', 'dashboard.php');
+
+		//change theme
+		$queries = array(
+			"UPDATE ". $prefix . "options SET option_value = 'open4scrum' WHERE option_name = 'template';",
+			"UPDATE ". $prefix . "options SET option_value = 'open4scrum' WHERE option_name = 'stylesheet';",
+			"UPDATE ". $prefix . "options SET option_value = 'open4scrum' WHERE option_name = 'current_theme';",
+			"UPDATE ". $prefix . "options SET option_value = '" . $startpage_id . "' WHERE option_name = 'page_on_front';",
+			"UPDATE ". $prefix . "options SET option_value = 'page' WHERE option_name = 'show_on_front';"
+		);
+		foreach ($queries as $query){
+			error_log($query);
+			$wpdb->query($query);
 		}
 
+		switch_to_blog( 1 );
+
+		?>
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert">×</button>
+			<strong>Congratulations!</strong><br />Site
+			<a href="<?php echo get_bloginfo( 'url' ) . $blog->path; ?>" target="_blank"> <?php echo get_bloginfo( 'url' ) . $blog->path; ?></a> created.<br />Please check your email for more info!
+		</div>
+		<?php
+
+		return;
+
+	}
+
+	function set_html_content_type() {
+		return 'text/html';
 	}
 
 }
