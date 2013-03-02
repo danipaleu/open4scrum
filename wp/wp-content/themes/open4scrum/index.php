@@ -1,9 +1,9 @@
-<?php include('header.php'); ?>
+<?php include( 'header.php' ); ?>
 
-    <div class="row-fluid">
-        <?php while ( have_posts() ) : the_post(); ?>
-        <?php get_template_part( 'content', 'page' ); ?>
-        <?php endwhile; // end of the loop. ?>
-    </div>
+<div class="row-fluid">
+	<?php while ( have_posts() ) : the_post(); ?>
+	<?php get_template_part( 'content', 'page' ); ?>
+	<?php endwhile; // end of the loop. ?>
+</div>
 
-<?php include('footer.php'); ?>
+<?php include( 'footer.php' ); ?>

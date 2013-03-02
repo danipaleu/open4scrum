@@ -15,7 +15,7 @@ Theme My Login will always look in your theme's directory first, before using th
 
 	<label for="user_name<?php $template->the_instance(); ?>"><?php _e( 'Username:', 'theme-my-login' ); ?></label>
 	<?php if ( $errmsg = $errors->get_error_message( 'user_name' ) ) { ?>
-		<p class="error"><?php echo $errmsg; ?></p>
+	<p class="error"><?php echo $errmsg; ?></p>
 	<?php } ?>
 
 	<input name="user_name" type="text" id="user_name<?php $template->the_instance(); ?>" value="<?php echo esc_attr( $user_name ); ?>" maxlength="60" /><br />
@@ -23,13 +23,13 @@ Theme My Login will always look in your theme's directory first, before using th
 
 	<label for="user_email<?php $template->the_instance(); ?>"><?php _e( 'Email&nbsp;Address:', 'theme-my-login' ); ?></label>
 	<?php if ( $errmsg = $errors->get_error_message( 'user_email' ) ) { ?>
-		<p class="error"><?php echo $errmsg ?></p>
+	<p class="error"><?php echo $errmsg ?></p>
 	<?php } ?>
-	
+
 	<input name="user_email" type="text" id="user_email<?php $template->the_instance(); ?>" value="<?php echo esc_attr( $user_email ); ?>" maxlength="200" /><br />
 	<span class="hint"><?php _e( 'We send your registration email to this address. (Double-check your email address before continuing.)', 'theme-my-login' ); ?></span>
 	<?php if ( $errmsg = $errors->get_error_message( 'generic' ) ) { ?>
-		<p class="error"><?php echo $errmsg; ?></p>
+	<p class="error"><?php echo $errmsg; ?></p>
 	<?php } ?>
 
 	<?php
@@ -38,19 +38,22 @@ Theme My Login will always look in your theme's directory first, before using th
 	?>
 
 	<p>
-	<?php if ( $active_signup == 'blog' ) { ?>
+		<?php if ( $active_signup == 'blog' ) { ?>
 		<input id="signupblog<?php $template->the_instance(); ?>" type="hidden" name="signup_for" value="blog" />
-	<?php } elseif ( $active_signup == 'user' ) { ?>
+		<?php }
+	elseif ( $active_signup == 'user' ) { ?>
 		<input id="signupblog<?php $template->the_instance(); ?>" type="hidden" name="signup_for" value="user" />
-	<?php } else { ?>
-		<input id="signupblog<?php $template->the_instance(); ?>" type="radio" name="signup_for" value="blog" <?php if ( !isset( $_POST['signup_for'] ) || $_POST['signup_for'] == 'blog' ) { ?>checked="checked"<?php } ?> />
+		<?php }
+	else { ?>
+		<input id="signupblog<?php $template->the_instance(); ?>" type="radio" name="signup_for" value="blog" <?php if ( ! isset( $_POST['signup_for'] ) || $_POST['signup_for'] == 'blog' ) { ?>checked="checked"<?php } ?> />
 		<label class="checkbox" for="signupblog"><?php _e( 'Gimme a site!', 'theme-my-login' ); ?></label>
 		<br />
 		<input id="signupuser<?php $template->the_instance(); ?>" type="radio" name="signup_for" value="user" <?php if ( isset( $_POST['signup_for'] ) && $_POST['signup_for'] == 'user' ) { ?>checked="checked"<?php } ?> />
 		<label class="checkbox" for="signupuser"><?php _e( 'Just a username, please.', 'theme-my-login' ); ?></label>
-	<?php } ?>
+		<?php } ?>
 	</p>
 
-	<p class="submit"><input type="submit" name="submit" class="submit" value="<?php esc_attr_e( 'Next', 'theme-my-login' ); ?>" /></p>
+	<p class="submit">
+		<input type="submit" name="submit" class="submit" value="<?php esc_attr_e( 'Next', 'theme-my-login' ); ?>" /></p>
 </form>
 <?php $template->the_action_links( array( 'register' => false ) ); ?>
