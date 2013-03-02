@@ -9,8 +9,10 @@ class open4scrum_mail{
 
 	function send(){
 
+		$headers[] = 'From: open4scrum <' . get_bloginfo('admin_email') . '>';
+
 		add_filter( 'wp_mail_content_type', array( &$this, 'set_html_content_type' ) );
-		if ( !wp_mail( $this->to, $this->subject, $this->get_body() ) ) {
+		if ( !wp_mail( $this->to, $this->subject, $this->get_body(), $headers ) ) {
 			error_log( print_r( $GLOBALS['phpmailer']->ErrorInfo, true ) );
 		}
 		remove_filter( 'wp_mail_content_type', 'set_html_content_type' ); // reset content-type to to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578

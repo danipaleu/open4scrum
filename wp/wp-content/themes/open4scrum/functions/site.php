@@ -9,7 +9,14 @@ class open4scrum_site {
 	function __construct() {
 
 		add_action( 'init', array( &$this, 'init' ) );
+		add_action( 'wp_login', array( &$this, 'wp_login' ) );
 
+	}
+
+	function wp_login( $login ){
+		global $user_ID;
+		$user = get_user_by('login', $login);
+		update_user_meta( $user->ID, 'my_last_login', date('Y-m-d H:i') );
 	}
 
 	static function get_blogurl( $user_id ){
@@ -58,6 +65,107 @@ class open4scrum_site {
 
 	}
 
+	function member_display(){
+
+		if ( isset( $_POST['invite'] ) && check_admin_referer( 'invite') ) {
+
+			$email = esc_attr( $_POST['invite'] );
+
+			$user_id = email_exists( $email );
+			if ( ! $user_id ) { // Create a new user with a random password
+				$password = wp_generate_password( 8, false );
+				$user_id  = wp_create_user( $email, $password, $email );
+				if ( false == $user_id ) {
+					?>
+					<div class="alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						<strong>Error!</strong> Unable to create user!
+					</div>
+					<?php
+					return;
+				}
+			}
+
+			$body    = "<h1>Welcome!</h1>";
+			$body 	.= "<p>You are invited by " . wp_get_current_user()->user_email . " to " . get_bloginfo('title') . " at open4scrum.</p>";
+			$body 	.= "<p>You can <a href=\"http://" . get_blog_details(1)->domain . "?email=" . $email . "\">login with your email address and password</a>.</p>";
+
+			if ( !empty( $password ) ){
+				$body 	.= "<p><strong>Email Address:</strong> " . $email . "<br/>";
+				$body 	.= "<p><strong>Password:</strong> " . $password . "</p>";
+			}
+			else{
+				$body 	.= "<p><strong>Use your existing account to login.</p>";
+			}
+
+			$body 	.= "<p><strong>See you!</strong></p>";
+
+			$mail = new open4scrum_mail();
+			$mail->subject = 'You are invited!';
+			$mail->message = $body;
+			$mail->preamble = 'Your colleague has invited you to open4scrum.';
+			$mail->to = $email;
+			$mail->send();
+
+			?>
+			<div class="alert alert-success">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				<strong>Invited!</strong><br/>You have invited a new user to your company site at open4scrum.
+			</div>
+			<?php
+
+		}
+
+		?>
+
+			<form method="POST">
+				<div class="controls">
+					<div class="input-append">
+						<input id="appendedInputButtons" type="text" name="invite" class="span4" placeholder="Email Address" />
+						<button type="submit" class="btn">Send invitation</button>
+					</div>
+				</div>
+				<?php wp_nonce_field('invite'); ?>
+			</form>
+
+			<table class="table table-bordered table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Latest login</th>
+						<th>Registered</th>
+					</tr>
+				</thead>
+				<tbody>
+				<?php
+
+					$args = array(
+						'orderby' => 'email',
+						'order'   => 'ASC',
+						'role'		=> 'subscriber'
+					);
+					$users = get_users( $args );
+
+					foreach( $users as $user ){
+						?>
+						<tr>
+							<td><?php echo $user->user_email; ?></td>
+							<td>colleague</td>
+							<td><?php echo get_user_meta( $user->ID, 'my_last_login', true); ?></td>
+							<td><?php echo $user->user_registered; ?></td>
+						</tr>
+						<?php
+					}
+
+				?>
+				</tbody>
+			</table>
+
+		<?php
+
+	}
+
 	function display_login() {
 
 		if ( isset( $_POST['button_login'] ) ) {
@@ -77,7 +185,7 @@ class open4scrum_site {
 				<label class="control-label" for="email">Email Address</label>
 
 				<div class="controls">
-					<input class="input-xlarge focused" name="email" id="email" type="text" value="<?php echo $_POST['email']; ?>">
+					<input class="input-xlarge focused" name="email" id="email" type="text" value="<?php echo $_REQUEST['email']; ?>">
 				</div>
 			</div>
 			<div class="control-group">
