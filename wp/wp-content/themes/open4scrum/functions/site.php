@@ -72,7 +72,7 @@ class open4scrum_site{
                 'min_length' => 6,
                 'max_length' => 6,
                 'png_backgrounds' => array('default.png'),
-                'fonts' => array('times_new_yorker.ttf'),
+                'fonts' => array( get_theme_root() . '/open4scrum/lib/captcha/times_new_yorker.ttf'),
                 'characters' => '0123456789',
                 'min_font_size' => 30,
                 'max_font_size' => 30,
