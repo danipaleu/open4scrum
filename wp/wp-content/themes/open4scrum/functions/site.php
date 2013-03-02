@@ -162,7 +162,7 @@ class open4scrum_site {
 
 		$company = sanitize_title( $company );
 
-		$email = esc_attr( $_POST['email'] );
+		$email = esc_attr( $_POST['email2'] );
 		$email = sanitize_email( $email );
 
 		if ( preg_match( '|^([a-zA-Z0-9-])+$|', $company ) )
@@ -225,13 +225,21 @@ class open4scrum_site {
 		//Now! Send the person a message about the next step!
 		$subject = "open4scrum";
 		$body    = "<h2>Welcome!</h2>";
-		$body .= "<p>Your site '<a href=\"" . get_bloginfo( 'url' ) . $blog->path . "\">" . $company_name . "</a>' is now created.</p>";
-		$body .= "<p>You can login with your Email Address '" . $email . "' and password '" . $password . "' any time.</p>";
-		$body .= "<p>Now, login and invite your collegues and try out open4scrum!</p>";
-		$body .= "<p>See you!</p>";
+		$body 	.= "<p>Your site is now created.</p>";
+		$body 	.= "<p>You can <a href=\"" . get_bloginfo('url') . "\">login with your email address and password</a> at any time.</p>";
+
+		if ( !empty( $password ) ){
+			$body 	.= "<p><strong>Email Address:</strong> " . $email . "<br/>";
+			$body 	.= "<p><strong>Password:</strong> " . $password . "</p>";
+		}
+
+		$body 	.= "<p>Now, login and invite your collegues and try out open4scrum!</p>";
+		$body 	.= "<p>See you!</p>";
 
 		add_filter( 'wp_mail_content_type', array( &$this, 'set_html_content_type' ) );
-		wp_mail( $email, $subject, $body );
+		if ( !wp_mail( $email, $subject, $body ) ) {
+			error_log( print_r( $GLOBALS['phpmailer']->ErrorInfo, true ) );
+		}
 		remove_filter( 'wp_mail_content_type', 'set_html_content_type' ); // reset content-type to to avoid conflicts -- http://core.trac.wordpress.org/ticket/23578
 
 		$prefix = $wpdb->prefix . $blog->blog_id . '_';
