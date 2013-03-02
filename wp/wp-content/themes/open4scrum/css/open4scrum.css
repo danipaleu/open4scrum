@@ -170,7 +170,7 @@ body {
 	font-size: 14px;
 	line-height: 18px;
 	color: #222222;
-	background-color: #fcfbfd;
+	background-color: #ffffff;
 }
 
 a {
@@ -3596,6 +3596,11 @@ input[type="submit"].btn.btn-mini {
 
 .nav-collapse.collapse {
 	height: auto;
+}
+
+.logo{
+	margin-top: 10px;
+	margin-left: 16px;
 }
 
 .navbar {

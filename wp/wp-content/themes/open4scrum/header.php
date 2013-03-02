@@ -58,8 +58,8 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			<a class="brand" href="/">
-				<span class="icon32 icon-black icon-sent"></span><span class="logotext">open4scrum</span></a>
+
+			<a href="/"><img class="logo" src="<?php echo get_stylesheet_directory_uri() ?>/img/logo_small.png" alt="logo" /></a>
 
 			<?php
 			if ( is_user_logged_in() ){
