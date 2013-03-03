@@ -18,7 +18,7 @@ if (!current_user_can('edit_posts')) {
 }
 
 function open4scrum_wp_mail_from_name($from_name){
-	return get_bloginfo('title');
+	return get_bloginfo('name');
 }
 add_filter("wp_mail_from_name", "open4scrum_wp_mail_from_name");
 
