@@ -4,6 +4,7 @@ session_start();
 include 'lib/captcha/simple-php-captcha.php';
 include 'functions/scripts.php';
 include 'functions/site.php';
+include 'functions/chat.php';
 include 'functions/mail.php';
 
 // show admin bar only for admins

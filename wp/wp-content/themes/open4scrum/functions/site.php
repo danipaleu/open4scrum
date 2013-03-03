@@ -209,14 +209,14 @@ class open4scrum_site {
 
 	function footer_focus() {
 		?>
-	<script>
-		jQuery(document).ready(function ($) {
+		<script>
+			jQuery(document).ready(function ($) {
 
-			$('input[name="email"]').focus();
+				$('input[name="email"]').focus();
 
-		});
-	</script>
-	<?php
+			});
+		</script>
+		<?php
 	}
 
 	function display_create() {

@@ -6,6 +6,7 @@
 get_header();
 
 $site_management = new open4scrum_site();
+$chat = new open4scrum_chat();
 
 ?>
 
@@ -22,12 +23,20 @@ $site_management = new open4scrum_site();
 	<p>&nbsp;</p>
 
 	<div class="row-fluid">
-		<div class="box span12">
+		<div class="box span6">
+			<div class="box-header well">
+				<h2><i class="icon icon-darkgray icon-comment"></i> Chat</h2>
+			</div>
+			<div class="box-content">
+				<?php $chat->display(); ?>
+			</div>
+		</div>
+		<div class="box span6">
 			<div class="box-header well">
 				<h2><i class="icon icon-darkgray icon-locked"></i> Members</h2>
 			</div>
 			<div class="box-content">
-				<p>&nbsp;</p>
+				<br/>
 				<?php $site_management->member_display(); ?>
 			</div>
 		</div>

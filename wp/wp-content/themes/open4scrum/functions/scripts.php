@@ -44,6 +44,9 @@ function open4scrum_scripts() {
 	//<!-- library for cookie management -->
 	wp_enqueue_script( 'jquery.cookie-js', get_template_directory_uri() . '/js/jquery.cookie.js', array(), false, true );
 
+	//<!-- autogrowing textarea plugin -->
+	wp_enqueue_script('autogrow-textarea-js',get_template_directory_uri() . '/js/jquery.autogrow-textarea.js', array(), false, true );
+
 	// general
 	wp_enqueue_script( 'open4scrum-js', get_template_directory_uri() . '/js/open4scrum.js', array( 'jquery' ), '1.0', true );
 
@@ -73,8 +76,6 @@ wp_enqueue_script('-js',get_template_directory_uri() . '/js/jquery.elfinder.min.
 wp_enqueue_script('-js',get_template_directory_uri() . '/js/jquery.raty.min.js' );
 <!-- for iOS style toggle switch -->
 wp_enqueue_script('-js',get_template_directory_uri() . '/js/jquery.iphone.toggle.js' );
-<!-- autogrowing textarea plugin -->
-wp_enqueue_script('-js',get_template_directory_uri() . '/js/jquery.autogrow-textarea.js' );
 <!-- multiple file upload plugin -->
 wp_enqueue_script('-js',get_template_directory_uri() . '/js/jquery.uploadify-3.1.min.js' );
 <!-- history.js for cross-browser state change on ajax -->
